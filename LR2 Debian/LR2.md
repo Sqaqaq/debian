@@ -29,8 +29,8 @@ PostgreSQL предоставляет два основных способа р�
 №1. Использовать параметры (например, -Fc, -Ft, обязательно посмотреть
 другие параметры).
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image1.png){width="6.496527777777778in"
-height="1.6916666666666667in"}![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image2.png){width="6.496527777777778in"
+![](LR2/media/image1.png){width="6.496527777777778in"
+height="1.6916666666666667in"}![](LR2/media/image2.png){width="6.496527777777778in"
 height="0.9729166666666667in"}
 
 -   psql -U postgres - Подключаемся к PostgreSQL
@@ -55,11 +55,11 @@ height="0.9729166666666667in"}
 дамп только определённых таблиц из схемы public. Объяснить, в чём
 отличие от резервного копирования всей базы.
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image3.png){width="6.496527777777778in"
+![](LR2/media/image3.png){width="6.496527777777778in"
 height="0.25763888888888886in"}
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image4.png){width="6.496527777777778in"
+![](LR2/media/image4.png){width="6.496527777777778in"
 height="0.5527777777777778in"}
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image5.png){width="6.496527777777778in"
+![](LR2/media/image5.png){width="6.496527777777778in"
 height="0.6in"}
 
 -   pg_dump -U postgres -d dblya -Fc -f dblya_test_schema.backup.dump -n
@@ -105,12 +105,12 @@ height="0.6in"}
 
 -   createdb -U postgres db1r2 -- создаем новую БД
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image6.png){width="6.496527777777778in"
+![](LR2/media/image6.png){width="6.496527777777778in"
 height="0.5125in"}
 
 -   ls -- смотрим содержание бэкапов
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image7.png){width="6.496527777777778in"
+![](LR2/media/image7.png){width="6.496527777777778in"
 height="0.5402777777777777in"}
 
 -   pg_restore -U postgres -d db1r2 -v dblya_backup.dump
@@ -127,7 +127,7 @@ height="0.5402777777777777in"}
 
     -   dblya_backup.dump: наш файл дампа, полная копия базы dblya.
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image8.png){width="6.496527777777778in"
+![](LR2/media/image8.png){width="6.496527777777778in"
 height="2.316666666666667in"}
 
 -   psql -U postgres -d db1r2 -- подключаемся к db1r2
@@ -138,7 +138,7 @@ height="2.316666666666667in"}
 
 -   SELECT \* FROM public_lya_table; - проверим наполненность таблицы
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image9.png){width="5.389067147856518in"
+![](LR2/media/image9.png){width="5.389067147856518in"
 height="3.641292650918635in"}
 
 -   pg_restore -l dblya_backup.dump
@@ -148,7 +148,7 @@ height="3.641292650918635in"}
         увидеть идентификаторы и названия схем, таблиц, индексов,
         constraints и т.д. Полезно для предпросмотра.
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image10.png){width="6.438431758530184in"
+![](LR2/media/image10.png){width="6.438431758530184in"
 height="4.609105424321959in"}
 
 5\. Автоматизация бэкапов с помощью cron. Настроить планировщик cron на
@@ -157,18 +157,18 @@ Debian, чтобы ежедневно создавать резервные ко
 
 -   sudo mkdir -p /var/backups/pg -- создаем директорию
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image11.png){width="6.496527777777778in"
+![](LR2/media/image11.png){width="6.496527777777778in"
 height="0.3611111111111111in"}
 
 -   sudo chown postgres:postgres /var/backups/pg -- выдать права на
     автоматическое создание логов
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image12.png){width="6.496527777777778in"
+![](LR2/media/image12.png){width="6.496527777777778in"
 height="0.24583333333333332in"}
 
 -   crontab -e -- открываем файл crontab
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image13.png){width="6.496527777777778in"
+![](LR2/media/image13.png){width="6.496527777777778in"
 height="0.23376531058617672in"}
 
 -   \* / 1 \* \* \* pg_dump -U postgres -Fc -f
@@ -179,7 +179,7 @@ height="0.23376531058617672in"}
 -   \* / 2 \* \* \* find /var/backups/pg -name \"dblya-\*.dump\" -mtime
     +7 -delete \# Ротация: удаление бэкапов старше 2-х минут
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image14.png){width="6.678622047244095in"
+![](LR2/media/image14.png){width="6.678622047244095in"
 height="3.4024923447069115in"}
 
 -   systemctl start cron - запускаем
@@ -192,11 +192,11 @@ height="3.4024923447069115in"}
 > настройки (RELOAD (crontabs)), а затем запускал команды pg_dump и
 > find.
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image15.png){width="6.496527777777778in"
+![](LR2/media/image15.png){width="6.496527777777778in"
 height="2.7958333333333334in"}
 
 Проверка на наличие дампов по
-пути.![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image16.png){width="6.496527777777778in"
+пути.![](LR2/media/image16.png){width="6.496527777777778in"
 height="3.026388888888889in"}
 
 Ротация -- это процесс автоматического удаления резервных копий, которые
@@ -276,14 +276,14 @@ PostgreSQL (CPU, RAM, IO). Уметь объяснить все значения
 
 -   COMMAND --- имя процесса (или путь к исполняемому файлу).
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image17.png){width="5.413194444444445in"
-height="0.15030621172353456in"}![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image18.png){width="5.427183945756781in"
+![](LR2/media/image17.png){width="5.413194444444445in"
+height="0.15030621172353456in"}![](LR2/media/image18.png){width="5.427183945756781in"
 height="4.182209098862642in"}
 
 htop --- это улучшенная версия top с цветным интерфейсом и более удобным
 управлением.
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image19.png){width="6.196302493438321in"
+![](LR2/media/image19.png){width="6.196302493438321in"
 height="3.1819411636045496in"}
 
 iotop --- утилита для мониторинга ввода-вывода (IO), то есть
@@ -305,12 +305,12 @@ iotop --- утилита для мониторинга ввода-вывода (
 
 -   COMMAND --- имя команды/процесса.
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image20.png){width="5.490927384076991in"
+![](LR2/media/image20.png){width="5.490927384076991in"
 height="2.854342738407699in"}
 
 Так же можно посмтореть процессы мониторинга в postgres:
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image21.png){width="6.496527777777778in"
+![](LR2/media/image21.png){width="6.496527777777778in"
 height="2.8270833333333334in"}
 
 7\. Мониторинг PostgreSQL Изучить встроенные представления статистики в
@@ -323,7 +323,7 @@ PostgreSQL (например, pg_stat_activity, pg_stat_database). Показа�
 -   SELECT \* FROM pg_stat_activity; - это встроенное представление в
     PostgreSQL, которое показывает все активные сессии и их состояние.
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image22.png){width="6.496527777777778in"
+![](LR2/media/image22.png){width="6.496527777777778in"
 height="1.9569444444444444in"}
 
 Вывели все активные сессии:
@@ -348,13 +348,13 @@ height="1.9569444444444444in"}
 
 -   state: статус сессии (active, idle, idle in transaction и т.д.).
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image23.png){width="6.496527777777778in"
+![](LR2/media/image23.png){width="6.496527777777778in"
 height="1.1104166666666666in"}
 
 SELECT \* FROM pg_stat_database; - просмотр работы БД, всей их
 статистики, запросов, ошибок, объемы чтения и записи и т.д.
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image24.png){width="6.496527777777778in"
+![](LR2/media/image24.png){width="6.496527777777778in"
 height="0.4847222222222222in"}
 
 -   datname -- имя базы данных (например, postgres, template1, dblya).
@@ -378,21 +378,21 @@ height="0.4847222222222222in"}
 
 -   stats_reset -- дата и время последнего сброса статистики.
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image25.png){width="6.496527777777778in"
+![](LR2/media/image25.png){width="6.496527777777778in"
 height="0.9576388888888889in"}
 
 -   SELECT pid, age (clock_timestamp(), query_start), query FROM
     pg_stat_activity WHERE state = \'active\' ORDER BY age DESC; - поиск
     долгих запросов
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image26.png){width="6.496527777777778in"
+![](LR2/media/image26.png){width="6.496527777777778in"
 height="0.13680555555555557in"}
 
 -   pg_sleep() -- пример долгого запроса, с помощью которого можно
     протестировать мониторинг.
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image27.png){width="6.496527777777778in"
-height="0.2950754593175853in"}![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image28.png){width="6.496527777777778in"
+![](LR2/media/image27.png){width="6.496527777777778in"
+height="0.2950754593175853in"}![](LR2/media/image28.png){width="6.496527777777778in"
 height="0.5493055555555556in"}
 
 -   SELECT pid, usename, application_name, state, query, query_start
@@ -404,7 +404,7 @@ height="0.5493055555555556in"}
     \'active\' AND now() - query_start \> interval \'2 minutes\'; -
     отключение всех запосов, которые активеые и больше 2-х минут
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image29.png){width="6.496527777777778in"
+![](LR2/media/image29.png){width="6.496527777777778in"
 height="1.632638888888889in"}
 
 8\. Логирование и анализ логов. Найти логи PostgreSQL и системные логи
@@ -413,14 +413,14 @@ Debian (директория /var/log/, файлы syslog, daemon.log). Опре
 
 Логи СУБД.
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image30.png){width="6.496527777777778in"
-height="1.2840277777777778in"}![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image31.png){width="6.496527777777778in"
+![](LR2/media/image30.png){width="6.496527777777778in"
+height="1.2840277777777778in"}![](LR2/media/image31.png){width="6.496527777777778in"
 height="2.7006944444444443in"}
 
 Логи ОС.
 
-![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image32.png){width="6.150833333333333in"
-height="3.9212795275590553in"}![](vertopal_07e1197be4764235a63a837f3ac077fc/media/image33.png){width="6.202299868766405in"
+![](LR2/media/image32.png){width="6.150833333333333in"
+height="3.9212795275590553in"}![](LR2/media/image33.png){width="6.202299868766405in"
 height="1.2159295713035871in"}
 
 +----------------------------------+-----------------------------------+
