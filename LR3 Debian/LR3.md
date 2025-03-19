@@ -73,7 +73,16 @@ INDEX), анализа (ANALYZE) и других операций админис
 Выполняем EXPLAIN ANALYZE до создания индекса и ищем 500 000.
 
 ![](LR3/media/image7.png)
-Теперь создаем индекс и снова ищем 500 000.
+
+Выполняем EXPLAIN
+
+![](LR3/media/image111.png)
+
+EXPLAIN: 
+Показывает теоретический план выполнения запроса.
+
+EXPLAIN ANALYZE:
+Запускает запрос реально, измеряет фактическое время выполнения.
 
 -   CREATE INDEX index_name ON table_name (column_name);
 
